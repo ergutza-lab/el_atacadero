@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>El Atacadero — Expertos en Tacos · Orizaba, Veracruz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    :root{
+      --rojo:#c0392b;--rojo-vivo:#e74c3c;--rojo-oscuro:#7d1f1f;
+      --naranja:#e67e22;--naranja-claro:#f39c12;
+      --carbon:#0f0c0a;--carbon-mid:#1c1714;--carbon-soft:#2a2320;
+      --crema:#f5ede0;--crema-dark:#d4c5b0;--blanco:#ffffff;
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Lato',sans-serif;background:var(--carbon);color:var(--crema);overflow-x:hidden;font-size:17px;line-height:1.75}
+
+    /* ── NAVBAR ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.85rem 3rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(15,12,10,.98) 0%,transparent 100%);transition:background .4s}
+    nav.scrolled{background:rgba(15,12,10,.99);border-bottom:1px solid rgba(192,57,43,.3)}
+    .nav-logo{display:flex;align-items:center;text-decoration:none}
+    .nav-logo img{height:52px;width:auto;object-fit:contain}
+    .nav-links{display:flex;gap:1.4rem;list-style:none}
+    .nav-links a{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--crema-dark);text-decoration:none;transition:color .3s}
+    .nav-links a:hover{color:var(--rojo-vivo)}
+    .nav-cta{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blanco);background:var(--rojo);padding:.6rem 1.3rem;text-decoration:none;transition:background .3s;white-space:nowrap}
+    .nav-cta:hover{background:var(--rojo-vivo)}
+
+    /* ── HERO ── */
+    #hero{position:relative;height:100vh;min-height:700px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 8% 5.5rem;overflow:hidden}
+    .hero-bg{
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(to top,rgba(15,12,10,.92) 0%,rgba(15,12,10,.25) 50%,rgba(15,12,10,.05) 100%),
+        linear-gradient(to right,rgba(15,12,10,.5) 0%,transparent 60%),
+        url("img/046_a8582b008e.png");
+      background-size:cover;background-position:center;
+      transform:scale(1.04);animation:heroZoom 14s ease-out forwards;
+    }
+    @keyframes heroZoom{from{transform:scale(1.04)}to{transform:scale(1)}}
+    .hero-content{position:relative;z-index:2}
+    .hero-logo-big{margin-bottom:1.6rem;opacity:0;animation:fadeUp .8s .3s ease forwards}
+    .hero-logo-big img{height:clamp(60px,9vw,110px);width:auto;object-fit:contain}
+    .hero-tag{font-family:'Oswald',sans-serif;font-size:.76rem;font-weight:400;letter-spacing:.4em;text-transform:uppercase;color:var(--naranja);margin-bottom:.6rem;opacity:0;animation:fadeUp .7s .55s ease forwards}
+    .hero-slogan{font-family:'Oswald',sans-serif;font-size:clamp(1rem,2.5vw,1.6rem);font-weight:300;color:var(--crema-dark);letter-spacing:.12em;margin-bottom:2.2rem;opacity:0;animation:fadeUp .8s .75s ease forwards}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .95s ease forwards}
+    .btn-red{font-family:'Oswald',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blanco);background:var(--rojo);padding:1.1rem 2.5rem;text-decoration:none;display:inline-block;position:relative;overflow:hidden;transition:transform .2s}
+    .btn-red::before{content:'';position:absolute;inset:0;background:var(--rojo-vivo);transform:translateX(-100%);transition:transform .3s}
+    .btn-red:hover::before{transform:translateX(0)}
+    .btn-red span{position:relative;z-index:1}
+    .btn-red:hover{transform:translateY(-2px)}
+    .btn-outline{font-family:'Oswald',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--crema);border:1px solid rgba(245,237,224,.45);padding:1.1rem 2.5rem;text-decoration:none;display:inline-block;transition:all .3s}
+    .btn-outline:hover{border-color:var(--crema);background:rgba(245,237,224,.08)}
+    .hero-scroll{position:absolute;bottom:2rem;right:8%;z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;opacity:0;animation:fadeIn 1s 1.4s ease forwards}
+    .hero-scroll span{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--naranja);writing-mode:vertical-rl}
+    .scroll-line{width:1px;height:3rem;background:linear-gradient(to bottom,var(--naranja),transparent);animation:pulse 2s infinite}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(2rem)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{to{opacity:1}}
+    @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+    /* ── FRANJA ── */
+    .red-strip{background:var(--rojo);padding:.9rem 0;overflow:hidden}
+    .marquee-wrap{display:flex;gap:3rem;white-space:nowrap;animation:marquee 22s linear infinite}
+    .marquee-item{font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--blanco);flex-shrink:0}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* ── BOTONES TRIO WHATSAPP ── */
+    .wa-trio{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem}
+    .wa-trio-btn{
+      display:inline-flex;align-items:center;gap:.5rem;
+      font-family:'Oswald',sans-serif;font-size:.72rem;font-weight:600;
+      letter-spacing:.12em;text-transform:uppercase;
+      background:#25D366;color:#000;
+      padding:.7rem 1.1rem;text-decoration:none;
+      transition:filter .3s,transform .2s;flex:1;justify-content:center;
+    }
+    .wa-trio-btn:nth-child(2){background:#128C7E;color:#fff}
+    .wa-trio-btn:nth-child(3){background:#075E54;color:#fff}
+    .wa-trio-btn:hover{filter:brightness(1.15);transform:translateY(-2px)}
+    .wa-trio-btn svg{width:.9rem;height:.9rem;fill:currentColor;flex-shrink:0}
+
+    /* ── SECCIONES ── */
+    section{padding:6rem 8%}
+    .sec-tag{font-family:'Oswald',sans-serif;font-size:.74rem;font-weight:500;letter-spacing:.35em;text-transform:uppercase;color:var(--naranja);margin-bottom:.8rem}
+    .sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,5vw,5rem);line-height:1;color:var(--blanco);margin-bottom:1.5rem}
+    .sec-title span{color:var(--rojo-vivo)}
+    .sec-body{font-size:1.12rem;font-weight:300;color:var(--crema-dark);line-height:1.82;margin-bottom:2rem;max-width:660px}
+    .divider{display:flex;align-items:center;gap:1rem;margin:.8rem 0 2.5rem}
+    .div-line{flex:1;height:2px;background:linear-gradient(to right,var(--rojo),transparent);max-width:6rem}
+    .div-sq{width:8px;height:8px;background:var(--rojo);transform:rotate(45deg);flex-shrink:0}
+
+    /* ── LO NUESTRO ── */
+    #especialidad{background:var(--carbon-mid)}
+    .pres-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:1rem}
+    .pres-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid rgba(192,57,43,.2);transition:border-color .3s,transform .3s}
+    .pres-card:hover{border-color:var(--rojo);transform:translateY(-5px)}
+    .pres-img{height:200px;overflow:hidden}
+    .pres-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+    .pres-card:hover .pres-img img{transform:scale(1.07)}
+    .pres-label{padding:1.1rem;background:var(--carbon-soft);text-align:center}
+    .pres-label strong{font-family:'Oswald',sans-serif;font-size:.88rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--crema);display:block;margin-bottom:.2rem}
+    .pres-label span{font-size:.9rem;color:var(--crema-dark);opacity:.65}
+
+    /* ── MENÚ ── */
+    #menu{background:var(--carbon)}
+    .menu-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem}
+    .menu-tabs{display:flex;gap:.5rem;flex-wrap:wrap}
+    .tab-btn{font-family:'Oswald',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--crema-dark);background:transparent;border:1px solid rgba(192,57,43,.3);padding:.6rem 1.3rem;cursor:pointer;transition:all .3s}
+    .tab-btn.active,.tab-btn:hover{background:var(--rojo);color:var(--blanco);border-color:var(--rojo)}
+    .menu-cat{display:none}
+    .menu-cat.active{display:grid;grid-template-columns:repeat(2,1fr)}
+    .menu-row{display:flex;align-items:center;gap:1.1rem;padding:1.3rem 1rem;border-bottom:1px solid rgba(192,57,43,.1);transition:background .2s}
+    .menu-row:hover{background:rgba(192,57,43,.06)}
+    .menu-row:nth-child(odd){border-right:1px solid rgba(192,57,43,.1)}
+    .menu-thumb{width:72px;height:72px;flex-shrink:0;overflow:hidden;border:1px solid rgba(192,57,43,.15)}
+    .menu-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .menu-row-info{flex:1}
+    .menu-row-info h4{font-family:'Oswald',sans-serif;font-size:1.08rem;font-weight:600;color:var(--crema);margin-bottom:.25rem}
+    .menu-row-info p{font-size:.95rem;color:rgba(212,197,176,.62);line-height:1.5}
+    .menu-price{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--naranja);white-space:nowrap;flex-shrink:0}
+    .menu-note{margin-top:2rem;text-align:center;font-size:1rem;color:rgba(212,197,176,.35);font-style:italic}
+    .menu-wa-note{margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(192,57,43,.15)}
+    .menu-wa-note p{font-family:'Oswald',sans-serif;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;color:var(--naranja);margin-bottom:.8rem}
+
+    /* ── PAQUETES ── */
+    #paquetes{background:var(--carbon-mid)}
+    .paq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem}
+    .paq-card{border:1px solid rgba(192,57,43,.2);overflow:hidden;background:var(--carbon-soft);transition:border-color .35s,transform .35s;cursor:pointer}
+    .paq-card:hover{border-color:var(--rojo-vivo);transform:translateY(-5px)}
+    .paq-img{height:240px;overflow:hidden;position:relative}
+    .paq-img img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:transform .5s}
+    .paq-card:hover .paq-img img{transform:scale(1.05)}
+    .paq-img-zoom{
+      position:absolute;inset:0;background:rgba(15,12,10,0);
+      display:flex;align-items:center;justify-content:center;
+      transition:background .3s;
+    }
+    .paq-card:hover .paq-img-zoom{background:rgba(15,12,10,.3)}
+    .paq-zoom-icon{
+      font-family:'Oswald',sans-serif;font-size:.7rem;font-weight:600;
+      letter-spacing:.2em;text-transform:uppercase;
+      color:var(--blanco);background:var(--rojo);
+      padding:.5rem 1rem;opacity:0;transition:opacity .3s;
+    }
+    .paq-card:hover .paq-zoom-icon{opacity:1}
+    .paq-body{padding:1.4rem 1.5rem}
+    .paq-tag{font-family:'Oswald',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--rojo-vivo);margin-bottom:.4rem}
+    .paq-body h3{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--blanco);margin-bottom:.5rem;line-height:1}
+    .paq-body p{font-size:1rem;color:var(--crema-dark);opacity:.75;line-height:1.55;margin-bottom:1rem}
+    .paq-price{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--naranja);line-height:1}
+    .paq-price sup{font-family:'Oswald',sans-serif;font-size:.9rem;vertical-align:super;color:var(--naranja);opacity:.7}
+    .paq-note{font-family:'Lato',sans-serif;font-size:.88rem;color:var(--crema-dark);opacity:.5;margin-top:.3rem}
+
+    /* ── LIGHTBOX ── */
+    #lightbox{
+      position:fixed;inset:0;z-index:999;
+      background:rgba(0,0,0,.92);
+      display:none;align-items:center;justify-content:center;
+      padding:1.5rem;
+    }
+    #lightbox.open{display:flex}
+    .lb-inner{position:relative;max-width:700px;width:100%;animation:lbIn .25s ease}
+    @keyframes lbIn{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+    .lb-img{width:100%;display:block;border:2px solid rgba(192,57,43,.4)}
+    .lb-close{
+      position:absolute;top:-.8rem;right:-.8rem;
+      width:2.4rem;height:2.4rem;background:var(--rojo);
+      border:none;cursor:pointer;color:#fff;font-size:1.2rem;
+      display:flex;align-items:center;justify-content:center;
+      transition:background .2s;
+    }
+    .lb-close:hover{background:var(--rojo-vivo)}
+    .lb-caption{
+      font-family:'Oswald',sans-serif;font-size:.85rem;font-weight:500;
+      letter-spacing:.15em;text-transform:uppercase;
+      color:var(--naranja);text-align:center;margin-top:1rem;
+    }
+    .lb-sub{font-size:.8rem;color:var(--crema-dark);text-align:center;margin-top:.3rem;font-style:italic}
+    .lb-wa{margin-top:1.2rem}
+
+    /* ── HISTORIA ── */
+    #historia{background:var(--carbon);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+    .hist-img-wrap{position:relative;height:520px}
+    .hist-img{width:100%;height:100%;overflow:hidden}
+    .hist-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .hist-frame{position:absolute;top:-1rem;left:-1rem;right:1rem;bottom:1rem;border:2px solid rgba(192,57,43,.3);pointer-events:none}
+    .hist-badge{position:absolute;bottom:-1.5rem;right:-1.5rem;width:9rem;height:9rem;background:var(--rojo);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .hist-badge strong{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--blanco);line-height:1}
+    .hist-badge span{font-family:'Oswald',sans-serif;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+    .hist-texto p{font-size:1.15rem;font-weight:300;line-height:1.88;color:var(--crema-dark);margin-bottom:1.2rem}
+    .hist-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
+    .stat-box{padding:1.2rem 1rem;background:var(--carbon-soft);border:1px solid rgba(192,57,43,.15);text-align:center}
+    .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--rojo-vivo);line-height:1}
+    .stat-label{font-family:'Oswald',sans-serif;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--crema-dark);opacity:.65;margin-top:.3rem}
+
+    /* ── SUCURSALES ── */
+    #sucursales{background:var(--carbon-mid)}
+    .suc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem}
+    .suc-card{border:1px solid rgba(192,57,43,.2);overflow:hidden;background:var(--carbon-soft);transition:border-color .3s}
+    .suc-card:hover{border-color:var(--rojo)}
+    .suc-img{height:210px;overflow:hidden}
+    .suc-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+    .suc-card:hover .suc-img img{transform:scale(1.05)}
+    .suc-body{padding:1.5rem}
+    .suc-tag{font-family:'Oswald',sans-serif;font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--rojo-vivo);margin-bottom:.4rem}
+    .suc-body h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--blanco);margin-bottom:.9rem;line-height:1}
+    .suc-info{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.3rem}
+    .suc-item{display:flex;align-items:flex-start;gap:.8rem}
+    .suc-icon{width:1.9rem;height:1.9rem;flex-shrink:0;border:1px solid rgba(192,57,43,.3);display:flex;align-items:center;justify-content:center}
+    .suc-icon svg{width:.85rem;height:.85rem;fill:var(--rojo-vivo)}
+    .suc-item p{font-size:1rem;font-weight:300;color:var(--crema-dark);line-height:1.5}
+    .suc-btns{display:flex;gap:.6rem;margin-top:.8rem}
+    .suc-btn{flex:1;padding:.75rem;text-align:center;text-decoration:none;font-family:'Oswald',sans-serif;font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:all .3s}
+    .suc-btn-call{background:var(--rojo);color:var(--blanco)}
+    .suc-btn-call:hover{background:var(--rojo-vivo)}
+    .suc-btn-wa{background:#25D366;color:#000;font-weight:700}
+    .suc-btn-wa:hover{filter:brightness(1.1)}
+
+    /* ── DOMICILIO ── */
+    #domicilio{background:var(--rojo-oscuro);text-align:center;padding:5rem 8%}
+    #domicilio h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.8rem);color:var(--blanco);line-height:1;margin-bottom:1rem}
+    #domicilio h2 span{color:var(--naranja-claro)}
+    #domicilio > p{font-size:1.15rem;font-weight:300;color:rgba(245,237,224,.8);margin-bottom:2rem;max-width:560px;margin-left:auto;margin-right:auto}
+    .del-trio{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .del-btn{font-family:'Oswald',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:1.1rem 1.8rem;text-decoration:none;display:inline-flex;align-items:center;gap:.7rem;transition:filter .3s,transform .2s;min-width:180px;justify-content:center}
+    .del-btn svg{width:1.1rem;height:1.1rem;fill:currentColor;flex-shrink:0}
+    .del-btn:hover{filter:brightness(1.15);transform:translateY(-2px)}
+    .del-1{background:#25D366;color:#000}
+    .del-2{background:#128C7E;color:#fff}
+    .del-3{background:#075E54;color:#fff}
+
+    /* ── RESEÑAS ── */
+    #resenas{background:var(--carbon);text-align:center}
+    .res-rating{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--rojo-vivo);line-height:1;margin-bottom:.3rem}
+    .res-stars{color:var(--naranja);font-size:1.2rem;letter-spacing:.1em;margin-bottom:.5rem}
+    .res-count{font-family:'Oswald',sans-serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--crema-dark);opacity:.6;margin-bottom:3rem}
+    .res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .res-card{padding:2.2rem;background:var(--carbon-soft);border:1px solid rgba(192,57,43,.12);text-align:left;position:relative}
+    .res-qmark{position:absolute;top:.5rem;right:1rem;font-family:'Bebas Neue',sans-serif;font-size:5rem;color:var(--rojo);opacity:.08;line-height:1}
+    .res-stars-sm{color:var(--naranja);font-size:.9rem;margin-bottom:.8rem;letter-spacing:.08em}
+    .res-card p{font-size:1.08rem;font-weight:300;line-height:1.8;color:var(--crema-dark);font-style:italic;margin-bottom:1.2rem}
+    .res-author{display:flex;align-items:center;gap:.8rem}
+    .res-avatar{width:2.5rem;height:2.5rem;border-radius:50%;background:var(--rojo-oscuro);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--rojo-vivo);flex-shrink:0}
+    .res-author-info strong{display:block;font-family:'Oswald',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.08em;color:var(--blanco)}
+    .res-author-info span{font-size:.88rem;color:rgba(212,197,176,.4)}
+    .res-source{margin-top:2rem;font-family:'Oswald',sans-serif;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(192,57,43,.4)}
+
+    /* ── CTA ── */
+    #cta{background:var(--carbon-mid);padding:7rem 8%;text-align:center;position:relative;overflow:hidden}
+    #cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(192,57,43,.12) 0%,transparent 70%)}
+    #cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,7vw,7rem);color:var(--blanco);line-height:.95;margin-bottom:.8rem;position:relative}
+    #cta h2 span{color:var(--rojo-vivo)}
+    #cta > p{font-size:1.2rem;font-weight:300;color:var(--crema-dark);max-width:520px;margin:1rem auto 2rem;position:relative}
+    .cta-wa-label{font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--naranja);margin-bottom:1rem;position:relative}
+    .cta-wa-trio{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative}
+    .cta-wa-btn{font-family:'Oswald',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:1.1rem 1.8rem;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:filter .3s,transform .2s;min-width:170px;justify-content:center}
+    .cta-wa-btn svg{width:1rem;height:1rem;fill:currentColor;flex-shrink:0}
+    .cta-wa-btn:hover{filter:brightness(1.15);transform:translateY(-2px)}
+    .cta-btn-1{background:#25D366;color:#000;font-weight:700}
+    .cta-btn-2{background:#128C7E;color:#fff}
+    .cta-btn-3{background:#075E54;color:#fff}
+
+    /* ── FOOTER ── */
+    footer{background:#070503;padding:2.5rem 8%;border-top:2px solid var(--rojo-oscuro);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem}
+    .foot-logo img{height:52px;width:auto;object-fit:contain}
+    .foot-copy{text-align:center}
+    .foot-copy p{font-family:'Oswald',sans-serif;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(212,197,176,.22);line-height:1.8}
+    .foot-copy span{color:rgba(192,57,43,.55)}
+    .foot-social{display:flex;gap:.8rem}
+    .foot-social a{width:2.2rem;height:2.2rem;border:1px solid rgba(192,57,43,.25);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:border-color .3s,background .3s}
+    .foot-social a svg{width:.9rem;height:.9rem;fill:var(--rojo-vivo)}
+    .foot-social a:hover{border-color:var(--rojo);background:rgba(192,57,43,.15)}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(1.5rem);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px){
+      nav{padding:.9rem 1.5rem}
+      .nav-links{display:none}
+      section{padding:4rem 5%}
+      #historia{grid-template-columns:1fr;gap:3rem}
+      .hist-img-wrap{height:340px}
+      .pres-grid{grid-template-columns:repeat(3,1fr)}
+      .paq-grid,.suc-grid,.res-grid{grid-template-columns:1fr}
+      .menu-cat.active{grid-template-columns:1fr}
+      .menu-row:nth-child(odd){border-right:none}
+      .hist-stats{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:580px){
+      .hero-btns,.del-trio,.cta-wa-trio{flex-direction:column;align-items:center}
+      footer{flex-direction:column;text-align:center}
+      .pres-grid{grid-template-columns:repeat(2,1fr)}
+      .hist-stats{grid-template-columns:1fr}
+      .suc-btns,.wa-trio{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+<div id="top"></div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLB(event)">
+  <div class="lb-inner" id="lb-inner">
+    <button class="lb-close" onclick="closeLB(null,true)">✕</button>
+    <img id="lb-img" class="lb-img" src="" alt=""/>
+    <div class="lb-caption" id="lb-caption"></div>
+    <div class="lb-sub" id="lb-sub"></div>
+    <div class="lb-wa"><div class="wa-trio">
+  <a href="https://wa.me/522727059587" target="_blank" class="wa-trio-btn">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+    Colón
+  </a>
+  <a href="https://wa.me/522722227387" target="_blank" class="wa-trio-btn">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+    San José
+  </a>
+  <a href="https://wa.me/522721547579" target="_blank" class="wa-trio-btn">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+    López M.
+  </a>
+</div></div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#top" class="nav-logo">
+    <img src="img/000_8c6d63461b.png" alt="El Atacadero"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#top">Inicio</a></li>
+    <li><a href="#especialidad">Lo Nuestro</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#paquetes">Paquetes</a></li>
+    <li><a href="#sucursales">Sucursales</a></li>
+    <li><a href="#domicilio">Domicilio</a></li>
+  </ul>
+  <a href="https://wa.me/522727059587" target="_blank" class="nav-cta">Pedir Ahora</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-logo-big">
+      <img src="img/000_8c6d63461b.png" alt="El Atacadero"/>
+    </div>
+    <p class="hero-tag">Orizaba, Veracruz · Desde 2015</p>
+    <p class="hero-slogan">· expertos en tacos ·</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-red"><span>Ver Menú</span></a>
+      <a href="#domicilio" class="btn-outline">Pedir por WhatsApp</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Descubrir</span></div>
+</section>
+
+<!-- FRANJA -->
+<div class="red-strip">
+  <div class="marquee-wrap">
+    <span class="marquee-item">🌮 Tacos Árabes</span><span class="marquee-item">🔥 Al Pastor</span><span class="marquee-item">🫓 Pan Árabe</span><span class="marquee-item">🌯 Pambazos</span><span class="marquee-item">🍗 Alitas</span><span class="marquee-item">📦 7 Paquetes</span><span class="marquee-item">🛵 A Domicilio</span><span class="marquee-item">📍 3 Sucursales</span><span class="marquee-item">🌮 Tacos Árabes</span><span class="marquee-item">🔥 Al Pastor</span><span class="marquee-item">🫓 Pan Árabe</span><span class="marquee-item">🌯 Pambazos</span><span class="marquee-item">🍗 Alitas</span><span class="marquee-item">📦 7 Paquetes</span><span class="marquee-item">🛵 A Domicilio</span><span class="marquee-item">📍 3 Sucursales</span>
+  </div>
+</div>
+
+<!-- LO NUESTRO -->
+<section id="especialidad">
+  <p class="sec-tag">Nuestra Especialidad</p>
+  <h2 class="sec-title">Lo <span>Nuestro</span></h2>
+  <div class="divider"><div class="div-line"></div><div class="div-sq"></div></div>
+  <p class="sec-body">La misma carne árabe de siempre, con la receta que nos hizo famosos en Orizaba desde 2015. Elige tu presentación favorita.</p>
+  <div class="pres-grid">
+    <div class="pres-card reveal"><div class="pres-img"><img src="img/001_266e95adc3.jpg" alt="Orientales" loading="lazy"/></div><div class="pres-label"><strong>Tortilla de Maíz</strong><span>Orientales</span></div></div>
+    <div class="pres-card reveal"><div class="pres-img"><img src="img/002_9c73380f77.jpg" alt="Pan árabe" loading="lazy"/></div><div class="pres-label"><strong>Pan Árabe</strong><span>Taco Árabe</span></div></div>
+    <div class="pres-card reveal"><div class="pres-img"><img src="img/003_9e760679ab.jpg" alt="Torta" loading="lazy"/></div><div class="pres-label"><strong>Torta / Pepito</strong><span>Con guacamole y frijoles</span></div></div>
+    <div class="pres-card reveal"><div class="pres-img"><img src="img/004_5e1ab9092f.jpg" alt="Pambazo" loading="lazy"/></div><div class="pres-label"><strong>Pambazo</strong><span>Estilo Orizaba</span></div></div>
+    <div class="pres-card reveal"><div class="pres-img"><img src="img/005_b121337d38.webp" alt="Gringa" loading="lazy"/></div><div class="pres-label"><strong>Gringa</strong><span>Tortilla de harina</span></div></div>
+  </div>
+</section>
+
+<!-- MENÚ -->
+<section id="menu">
+  <div class="menu-header">
+    <div><p class="sec-tag">Lo que Ofrecemos</p><h2 class="sec-title">El <span>Menú</span></h2></div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="showTab('arabes',this)">Tacos Árabes</button>
+      <button class="tab-btn" onclick="showTab('pastor',this)">Al Pastor</button>
+      <button class="tab-btn" onclick="showTab('alitas',this)">Alitas</button>
+      <button class="tab-btn" onclick="showTab('entradas',this)">Entradas</button>
+      <button class="tab-btn" onclick="showTab('bebidas',this)">Bebidas</button>
+    </div>
+  </div>
+  <div id="tab-arabes" class="menu-cat active">
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/006_85ee99eab1.jpg" alt="Orden de Orientales" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Orden de Orientales</h4><p>4 taquitos en tortilla de mano recién hecha</p></div>
+      <div class="menu-price">$87</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/004_5e1ab9092f.jpg" alt="Orden de Orientales con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Orden de Orientales con Queso</h4><p>3 piezas en tortilla de mano con queso</p></div>
+      <div class="menu-price">$103</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/001_266e95adc3.jpg" alt="Taco Árabe Sencillo" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Taco Árabe Sencillo</h4><p>Pan árabe con carne árabe</p></div>
+      <div class="menu-price">$65</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/007_256523abfc.jpg" alt="Taco Árabe con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Taco Árabe con Queso</h4><p>Pan árabe con carne árabe y queso</p></div>
+      <div class="menu-price">$78</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/008_5906882235.jpg" alt="Torta Árabe con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Torta Árabe con Queso</h4><p>Torta con carne árabe y queso</p></div>
+      <div class="menu-price">$78</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/009_8ee32bb1f9.jpg" alt="Triángulo de Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Triángulo de Queso</h4><p>Pan árabe con queso derretido</p></div>
+      <div class="menu-price">$65</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/010_bfb4c78aeb.jpg" alt="Triángulo de Queso y Carne" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Triángulo de Queso y Carne</h4><p>Pan árabe con queso y carne árabe</p></div>
+      <div class="menu-price">$78</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/011_e00fe89884.jpg" alt="Pambazo de Carne Árabe con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Pambazo de Carne Árabe con Queso</h4><p>Con queso, frijoles, mayonesa y carne árabe</p></div>
+      <div class="menu-price">$78</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/012_316869e411.jpg" alt="½ Kilo de Carne Árabe Sencillo" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>½ Kilo de Carne Árabe Sencillo</h4><p>Incluye 10 tortillas de mano y 3 panes árabes</p></div>
+      <div class="menu-price">$234</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/005_b121337d38.webp" alt="1 Kilo de Carne Árabe con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>1 Kilo de Carne Árabe con Queso</h4><p>Incluye 20 tortillas de mano y 6 panes árabes</p></div>
+      <div class="menu-price">$481</div>
+    </div>
+  </div>
+  <div id="tab-pastor" class="menu-cat">
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/013_68af97198d.jpg" alt="Orden de Tacos al Pastor con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Orden de Tacos al Pastor con Queso</h4><p>3 tacos en tortilla de maíz botanera con queso</p></div>
+      <div class="menu-price">$114</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/014_cd8b485ece.jpg" alt="Taco de Pastor en Pan Árabe con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Taco de Pastor en Pan Árabe con Queso</h4><p>Pan árabe con carne al pastor y queso</p></div>
+      <div class="menu-price">$85</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/003_9e760679ab.jpg" alt="Torta al Pastor con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Torta al Pastor con Queso</h4><p>Con mayonesa y frijoles</p></div>
+      <div class="menu-price">$85</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/015_e253a48b78.jpg" alt="Pepito al Pastor" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Pepito al Pastor</h4><p>Torta con mayonesa, frijoles, guacamole y queso</p></div>
+      <div class="menu-price">$92</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/002_9c73380f77.jpg" alt="Pambazo al Pastor" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Pambazo al Pastor</h4><p>Con frijoles, mayonesa, cebolla, cilantro y piña</p></div>
+      <div class="menu-price">$72</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/016_b98736005a.jpg" alt="Pambazo al Pastor con Queso" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Pambazo al Pastor con Queso</h4><p>Con frijoles, mayonesa y queso</p></div>
+      <div class="menu-price">$85</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/017_be190380cb.jpg" alt="Gringa al Pastor" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Gringa al Pastor</h4><p>Tortilla de harina con queso, cebolla, cilantro y piña</p></div>
+      <div class="menu-price">$111</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/018_d052d53eb0.jpg" alt="Burrito de Pastor" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Burrito de Pastor</h4><p>Pan árabe con queso, frijoles, mayonesa y guacamole</p></div>
+      <div class="menu-price">$111</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/019_84922f801b.jpg" alt="½ Kilo de Carne al Pastor" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>½ Kilo de Carne al Pastor</h4><p>20 tortillas botaneras, cebolla, cilantro y piña</p></div>
+      <div class="menu-price">$234</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/020_dd9fc72277.jpg" alt="1 Kilo de Carne al Pastor" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>1 Kilo de Carne al Pastor</h4><p>40 tortillas botaneras, cebolla, cilantro y piña</p></div>
+      <div class="menu-price">$429</div>
+    </div>
+  </div>
+  <div id="tab-alitas" class="menu-cat">
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/021_d7419902d7.jpg" alt="Alitas Búfalo — 6 piezas" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Alitas Búfalo — 6 piezas</h4><p>Con salsa búfalo</p></div>
+      <div class="menu-price">$113</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/022_51a1eedd09.jpg" alt="Alitas Búfalo — 12 piezas" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Alitas Búfalo — 12 piezas</h4><p>Con salsa búfalo</p></div>
+      <div class="menu-price">$185</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/023_eac3ef0be1.jpg" alt="Alitas BBQ — 6 piezas" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Alitas BBQ — 6 piezas</h4><p>Con salsa BBQ</p></div>
+      <div class="menu-price">$113</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/024_46cc34a068.jpg" alt="Alitas BBQ — 12 piezas" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Alitas BBQ — 12 piezas</h4><p>Con salsa BBQ</p></div>
+      <div class="menu-price">$185</div>
+    </div>
+  </div>
+  <div id="tab-entradas" class="menu-cat">
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/025_a1ba38ebd3.jpg" alt="Nuggets de Pollo" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Nuggets de Pollo</h4><p>100% pechuga de pollo</p></div>
+      <div class="menu-price">$64</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/026_023ac3feda.jpg" alt="Papas a la Francesa" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Papas a la Francesa</h4><p>225 gr. con aderezo de pimienta limón</p></div>
+      <div class="menu-price">$66</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/027_a8ea77ed79.jpg" alt="Aros de Cebolla" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Aros de Cebolla</h4><p>8 aros de cebolla</p></div>
+      <div class="menu-price">$77</div>
+    </div>
+  </div>
+  <div id="tab-bebidas" class="menu-cat">
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/028_1c7cba9b47.jpg" alt="Agua de Horchata ½ Lt." loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Agua de Horchata ½ Lt.</h4><p>Preparada al momento</p></div>
+      <div class="menu-price">$47</div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-thumb"><img src="img/029_c828401c32.jpg" alt="Agua Ciel 600 ml" loading="lazy"/></div>
+      <div class="menu-row-info"><h4>Agua Ciel 600 ml</h4><p>Agua natural embotellada</p></div>
+      <div class="menu-price">$31</div>
+    </div>
+  </div>
+  <p class="menu-note">Precios sujetos a cambio · Consulta disponibilidad en tu sucursal más cercana</p>
+  <div class="menu-wa-note">
+    <p>¿Listo para ordenar? Elige tu sucursal:</p>
+    <div class="wa-trio">
+  <a href="https://wa.me/522727059587" target="_blank" class="wa-trio-btn">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+    Colón
+  </a>
+  <a href="https://wa.me/522722227387" target="_blank" class="wa-trio-btn">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+    San José
+  </a>
+  <a href="https://wa.me/522721547579" target="_blank" class="wa-trio-btn">
+    <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+    López M.
+  </a>
+</div>
+  </div>
+</section>
+
+<!-- PAQUETES -->
+<section id="paquetes">
+  <p class="sec-tag">La Mejor Opción</p>
+  <h2 class="sec-title">Nuestros <span>Paquetes</span></h2>
+  <div class="divider"><div class="div-line"></div><div class="div-sq"></div></div>
+  <p class="sec-body">Combos diseñados para comer más por menos. Todos incluyen bebida. ¡Haz clic en cualquier paquete para verlo en grande!</p>
+  <div class="paq-grid">
+    <div class="paq-card reveal" onclick="openLB('img/039_74af62d2eb.png','Paquete 01 — Orden de Orientales','1 Orden de tacos orientales + Bebida · $83 (con queso +$15)')">
+      <div class="paq-img"><img src="img/030_74af62d2eb.png" alt="Paquete 1" loading="lazy"/><div class="paq-img-zoom"><span class="paq-zoom-icon">Ver en grande</span></div></div>
+      <div class="paq-body"><div class="paq-tag">Paquete 01</div><h3>Orden de Orientales</h3><p>1 Orden de tacos orientales + Bebida (refresco o agua)</p><div class="paq-price"><sup>$</sup>83</div><div class="paq-note">Con queso +$15</div></div>
+    </div>
+    <div class="paq-card reveal" onclick="openLB('img/040_96c0e24537.png','Paquete 02 — 2 Tacos Árabes','2 Tacos árabes + Bebida · $109 (con queso +$20)')">
+      <div class="paq-img"><img src="img/031_96c0e24537.png" alt="Paquete 2" loading="lazy"/><div class="paq-img-zoom"><span class="paq-zoom-icon">Ver en grande</span></div></div>
+      <div class="paq-body"><div class="paq-tag">Paquete 02</div><h3>2 Tacos Árabes</h3><p>2 Tacos árabes + Bebida (refresco o agua)</p><div class="paq-price"><sup>$</sup>109</div><div class="paq-note">Con queso +$20</div></div>
+    </div>
+    <div class="paq-card reveal" onclick="openLB('img/041_42d4f6b083.png','Paquete 03 — Taco + Torta Árabe','1 Taco árabe con queso + 1 Torta árabe + Bebida · $109 (con queso +$20)')">
+      <div class="paq-img"><img src="img/032_42d4f6b083.png" alt="Paquete 3" loading="lazy"/><div class="paq-img-zoom"><span class="paq-zoom-icon">Ver en grande</span></div></div>
+      <div class="paq-body"><div class="paq-tag">Paquete 03</div><h3>Taco + Torta Árabe</h3><p>1 Taco árabe con queso + 1 Torta árabe + Bebida</p><div class="paq-price"><sup>$</sup>109</div><div class="paq-note">Con queso +$20</div></div>
+    </div>
+    <div class="paq-card reveal" onclick="openLB('img/042_42d4f6b083.png','Paquete 04 — Taco + Orientales','1 Taco árabe con queso + 1 Orden de orientales + Bebida · $131 (con queso +$15)')">
+      <div class="paq-img"><img src="img/032_42d4f6b083.png" alt="Paquete 4" loading="lazy"/><div class="paq-img-zoom"><span class="paq-zoom-icon">Ver en grande</span></div></div>
+      <div class="paq-body"><div class="paq-tag">Paquete 04</div><h3>Taco + Orientales</h3><p>1 Taco árabe con queso + 1 Orden de orientales + Bebida</p><div class="paq-price"><sup>$</sup>131</div><div class="paq-note">Con queso +$15</div></div>
+    </div>
+    <div class="paq-card reveal" onclick="openLB('img/043_c773ad6092.png','Paquete 05 — 4 Tacos Árabes','4 Tacos árabes + 1 Bebida · $209 (con queso +$40)')">
+      <div class="paq-img"><img src="img/033_c773ad6092.png" alt="Paquete 5" loading="lazy"/><div class="paq-img-zoom"><span class="paq-zoom-icon">Ver en grande</span></div></div>
+      <div class="paq-body"><div class="paq-tag">Paquete 05</div><h3>4 Tacos Árabes</h3><p>4 Tacos árabes + 1 Bebida (refresco o agua)</p><div class="paq-price"><sup>$</sup>209</div><div class="paq-note">Con queso +$40</div></div>
+    </div>
+    <div class="paq-card reveal" onclick="openLB('img/044_c773ad6092.png','Paquete 06 — 16 Orientales Familiar','16 Orientales + 1 Cebolla asada + 2 Bebidas · $252 (con queso +$60)')">
+      <div class="paq-img"><img src="img/033_c773ad6092.png" alt="Paquete 6" loading="lazy"/><div class="paq-img-zoom"><span class="paq-zoom-icon">Ver en grande</span></div></div>
+      <div class="paq-body"><div class="paq-tag">Paquete 06</div><h3>16 Orientales Familiar</h3><p>16 Tacos orientales + 1 Cebolla asada + 2 Bebidas</p><div class="paq-price"><sup>$</sup>252</div><div class="paq-note">Con queso +$60</div></div>
+    </div>
+    <div class="paq-card reveal" onclick="openLB('img/045_3a339d7255.png','Paquete 07 — 1 Kilo de Carne','1 Kg carne árabe o pastor + Cebolla + Refresco 2 Lt + 20 tortillas + 6 panes · $339 (queso +$40 · Coca-Cola +$20)')">
+      <div class="paq-img"><img src="img/034_3a339d7255.png" alt="Paquete 7" loading="lazy"/><div class="paq-img-zoom"><span class="paq-zoom-icon">Ver en grande</span></div></div>
+      <div class="paq-body"><div class="paq-tag">Paquete 07</div><h3>1 Kilo de Carne</h3><p>1 Kg de carne árabe o al pastor + Cebolla + Refresco 2 Lt + 20 tortillas + 6 panes árabes</p><div class="paq-price"><sup>$</sup>339</div><div class="paq-note">Con queso +$40 · Cambio a Coca-Cola +$20</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA -->
+<section id="historia">
+  <div class="hist-img-wrap reveal">
+    <div class="hist-img"><img src="img/035_72f474e9cd.jpg" alt="El trompo de El Atacadero" loading="lazy"/></div>
+    <div class="hist-frame"></div>
+    <div class="hist-badge"><strong>10</strong><span>años de sabor</span></div>
+  </div>
+  <div class="hist-texto reveal">
+    <p class="sec-tag">Quiénes Somos</p>
+    <h2 class="sec-title">Nuestra <span>Historia</span></h2>
+    <div class="divider"><div class="div-line"></div><div class="div-sq"></div></div>
+    <p>El 2 de mayo de 2015 abrimos las puertas con solo 5 mesas y una receta de carne árabe que no íbamos a cambiar por nada.</p>
+    <p>Diez años después, Orizaba nos ha respondido de la mejor manera: 28 mesas, 3 sucursales y miles de clientes que siguen regresando por el mismo sabor de siempre.</p>
+    <p>Somos expertos en tacos. Y en nada más.</p>
+    <div class="hist-stats">
+      <div class="stat-box"><div class="stat-num">2015</div><div class="stat-label">Año de fundación</div></div>
+      <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Sucursales</div></div>
+      <div class="stat-box"><div class="stat-num">4.6★</div><div class="stat-label">Calificación DiDi</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SUCURSALES -->
+<section id="sucursales">
+  <p class="sec-tag">Encuéntranos</p>
+  <h2 class="sec-title">Nuestras <span>Sucursales</span></h2>
+  <div class="divider"><div class="div-line"></div><div class="div-sq"></div></div>
+  <div class="suc-grid">
+    <div class="suc-card reveal">
+      <div class="suc-img"><img src="img/036_47dcb51025.jpg" alt="Colón Centro" loading="lazy"/></div>
+      <div class="suc-body">
+        <div class="suc-tag">Sucursal 01</div>
+        <h3>Colón Centro</h3>
+        <div class="suc-info">
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div><p>Colón Oriente 165, Centro<br>Orizaba, Veracruz</p></div>
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C9.61 21 3 14.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg></div><p>272 724 3000</p></div>
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div><p>Lun – Dom: 12:00 pm – 11:00 pm</p></div>
+        </div>
+        <div class="suc-btns">
+          <a href="tel:2727243000" class="suc-btn suc-btn-call">Llamar</a>
+          <a href="https://wa.me/522727059587" target="_blank" class="suc-btn suc-btn-wa">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="suc-card reveal">
+      <div class="suc-img"><img src="img/037_eb7fa1c232.jpg" alt="San José" loading="lazy"/></div>
+      <div class="suc-body">
+        <div class="suc-tag">Sucursal 02</div>
+        <h3>San José</h3>
+        <div class="suc-info">
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div><p>Sur 7 No. 64, frente a Telégrafos<br>Orizaba, Veracruz</p></div>
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C9.61 21 3 14.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg></div><p>272 726 2000</p></div>
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div><p>Lun – Dom: 12:00 pm – 12:00 am</p></div>
+        </div>
+        <div class="suc-btns">
+          <a href="tel:2727262000" class="suc-btn suc-btn-call">Llamar</a>
+          <a href="https://wa.me/522722227387" target="_blank" class="suc-btn suc-btn-wa">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="suc-card reveal">
+      <div class="suc-img"><img src="img/038_64e6e9d123.jpg" alt="López Mateos" loading="lazy"/></div>
+      <div class="suc-body">
+        <div class="suc-tag">Sucursal 03</div>
+        <h3>López Mateos</h3>
+        <div class="suc-info">
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg></div><p>Av. Cri-Crí 1951<br>Adolfo López Mateos, Orizaba</p></div>
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C9.61 21 3 14.39 3 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg></div><p>272 154 7579</p></div>
+          <div class="suc-item"><div class="suc-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div><p>Lun – Dom: 12:00 pm – 12:00 am</p></div>
+        </div>
+        <div class="suc-btns">
+          <a href="tel:2721547579" class="suc-btn suc-btn-call">Llamar</a>
+          <a href="https://wa.me/522721547579" target="_blank" class="suc-btn suc-btn-wa">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMICILIO -->
+<section id="domicilio">
+  <h2>¿No puedes venir?<br><span>Haz tu pedido por WhatsApp</span></h2>
+  <p>Sin intermediarios, sin comisiones. Contáctanos directo a la sucursal más cercana.</p>
+  <div class="del-trio">
+    <a href="https://wa.me/522727059587" target="_blank" class="del-btn del-1">
+      <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+      Colón Centro
+    </a>
+    <a href="https://wa.me/522722227387" target="_blank" class="del-btn del-2">
+      <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+      San José
+    </a>
+    <a href="https://wa.me/522721547579" target="_blank" class="del-btn del-3">
+      <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+      López Mateos
+    </a>
+  </div>
+</section>
+
+<!-- RESEÑAS -->
+<section id="resenas">
+  <p class="sec-tag">Lo que dicen nuestros clientes</p>
+  <div class="res-rating">4.6</div>
+  <div class="res-stars">★★★★★</div>
+  <div class="res-count">Más de 1,176 reseñas en Google, Tripadvisor y DiDi Food</div>
+  <div class="res-grid">
+    <div class="res-card reveal"><div class="res-qmark">"</div><div class="res-stars-sm">★★★★★</div><p>Los mejores tacos árabes de Orizaba, sin duda. La carne siempre en su punto y las tortillas recién hechas. ¡Ya perdí la cuenta de cuántas veces he venido!</p><div class="res-author"><div class="res-avatar">M</div><div class="res-author-info"><strong>Mónica S.</strong><span>Google Reviews</span></div></div></div>
+    <div class="res-card reveal"><div class="res-qmark">"</div><div class="res-stars-sm">★★★★★</div><p>Vine de visita a Orizaba y El Atacadero fue la mejor recomendación que me dieron. El taco árabe con queso es una experiencia que no esperaba. ¡Regreso seguro!</p><div class="res-author"><div class="res-avatar">R</div><div class="res-author-info"><strong>Roberto A.</strong><span>Tripadvisor</span></div></div></div>
+    <div class="res-card reveal"><div class="res-qmark">"</div><div class="res-stars-sm">★★★★★</div><p>El Paquete 7 es un juegazo para reuniones familiares. Alcanza para todos y el precio es muy accesible. Servicio rápido y la carne árabe increíble.</p><div class="res-author"><div class="res-avatar">L</div><div class="res-author-info"><strong>Laura M.</strong><span>Google Reviews</span></div></div></div>
+  </div>
+  <p class="res-source">Calificación 4.6 ⭐ · Google Maps · Tripadvisor · DiDi Food</p>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <h2>¿Tienes<br><span>Hambre?</span></h2>
+  <p>Haz tu pedido por WhatsApp directo a la sucursal más cercana. La misma carne árabe de siempre, donde tú estés.</p>
+  <p class="cta-wa-label">Elige tu sucursal</p>
+  <div class="cta-wa-trio">
+    <a href="https://wa.me/522727059587" target="_blank" class="cta-wa-btn cta-btn-1">
+      <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+      Colón Centro
+    </a>
+    <a href="https://wa.me/522722227387" target="_blank" class="cta-wa-btn cta-btn-2">
+      <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+      San José
+    </a>
+    <a href="https://wa.me/522721547579" target="_blank" class="cta-wa-btn cta-btn-3">
+      <svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg>
+      López Mateos
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo"><img src="img/000_8c6d63461b.png" alt="El Atacadero"/></div>
+  <div class="foot-copy">
+    <p>© 2025 El Atacadero · Expertos en Tacos · 3 Sucursales en Orizaba, Veracruz</p>
+    <p>Diseño y desarrollo web: <span>Portal Digital 2000</span></p>
+  </div>
+  <div class="foot-social">
+    <a href="https://www.facebook.com/elatacaderoorizaba" target="_blank"><svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.99 3.66 9.12 8.44 9.88v-6.99H8.08V12h2.36V9.87c0-2.33 1.39-3.62 3.51-3.62.99 0 2.06.18 2.06.18v2.27h-1.16c-1.15 0-1.5.71-1.5 1.44V12h2.56l-.41 2.89h-2.15v6.99C18.34 21.12 22 17 22 12z"/></svg></a>
+    <a href="https://wa.me/522727059587" target="_blank"><svg viewBox="0 0 24 24"><path d="M20.52 3.48A11.93 11.93 0 0012.01 0C5.38 0 .01 5.37.01 12c0 2.11.55 4.17 1.6 5.99L0 24l6.17-1.58A12.01 12.01 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 21.88a9.88 9.88 0 01-5.04-1.38l-.36-.21-3.73.96.99-3.62-.23-.37A9.87 9.87 0 012.12 12C2.12 6.55 6.56 2.12 12 2.12c2.64 0 5.12 1.03 6.98 2.89A9.83 9.83 0 0121.88 12c0 5.45-4.44 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.28-.1-.48-.15-.68.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.14 8.14 0 01-2.4-1.48 9.07 9.07 0 01-1.66-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.63-.93-2.23-.24-.59-.49-.51-.68-.52l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/></svg></a>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById("navbar");
+  window.addEventListener("scroll", () => { navbar.classList.toggle("scrolled", window.scrollY > 60); });
+
+  // Tabs menú
+  function showTab(cat, btn) {
+    document.querySelectorAll(".menu-cat").forEach(s => s.classList.remove("active"));
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.getElementById("tab-" + cat).classList.add("active");
+    btn.classList.add("active");
+  }
+
+  // Lightbox paquetes
+  function openLB(src, caption, sub) {
+    document.getElementById("lb-img").src = src;
+    document.getElementById("lb-caption").textContent = caption;
+    document.getElementById("lb-sub").textContent = sub;
+    document.getElementById("lightbox").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeLB(e, force) {
+    if (force || (e && e.target === document.getElementById("lightbox"))) {
+      document.getElementById("lightbox").classList.remove("open");
+      document.body.style.overflow = "";
+    }
+  }
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLB(null, true); });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
